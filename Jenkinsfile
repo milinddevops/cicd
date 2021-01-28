@@ -25,6 +25,12 @@ pipeline {
                 sh'cd $WORKSPACE/pet-clinic; mvn clean package'
             }
         }
+
+        stage("Build Image") {
+            steps{
+                sh'Building docker image ...'
+            }
+        }
     }
 }
 
