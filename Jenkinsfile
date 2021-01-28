@@ -6,9 +6,11 @@ pipeline {
 
     stages {
         stage("Init") {
-            sh'''
-            echo $PATH
-            '''
+            steps {
+                sh'''
+                echo $PATH
+                '''
+            }
         }
 
         stage("Prep Workspace") {
