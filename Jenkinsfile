@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // This step should not normally be used in your script. Consult the inline help for details.
                 withDockerContainer(image: 'maven:3.5.0-jdk-8-alpine', toolName: 'Docker') {
-                    sh'mvn package'
+                    sh'cd $WORKSPACE/pet-clinic; mvn package'
                 }
             }
         }
