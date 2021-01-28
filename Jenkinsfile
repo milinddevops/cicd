@@ -22,7 +22,7 @@ pipeline {
 
         stage("Build App") {
             steps {
-                sh'cd $WORKSPACE/pet-clinic; mvn package'
+                sh'cd $WORKSPACE/pet-clinic; mvn clean compile'
             }
         }
     }
