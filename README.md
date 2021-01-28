@@ -1,1 +1,1 @@
-# cicd
+# CICD reference application demo.
