@@ -1,7 +1,16 @@
 pipeline {
     agent any
+    tools {
+        maven 'maven'
+    }
 
     stages {
+        stage("Init") {
+            sh'''
+            echo $PATH
+            '''
+        }
+
         stage("Prep Workspace") {
             steps {
                 prepWorkspace()
@@ -10,10 +19,7 @@ pipeline {
 
         stage("Build App") {
             steps {
-                // This step should not normally be used in your script. Consult the inline help for details.
-                withDockerContainer(image: 'maven:3.5.0-jdk-8-alpine', toolName: 'Docker') {
-                    sh'cd $WORKSPACE/pet-clinic; mvn package'
-                }
+                sh'cd $WORKSPACE/pet-clinic; mvn package'
             }
         }
     }
