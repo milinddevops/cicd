@@ -28,7 +28,7 @@ pipeline {
 
         stage("Build Image") {
             steps{
-                sh'Building docker image ...'
+                sh'echo "Building docker image ..."'
             }
         }
     }
