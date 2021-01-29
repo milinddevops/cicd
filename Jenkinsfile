@@ -31,6 +31,12 @@ pipeline {
                 buildDockerImage()
             }
         }
+
+        stage("Ansible - Deploy Playbook") {
+            steps{
+                sh'echo "Running playbook..."'
+            }
+        }
     }
 }
 
