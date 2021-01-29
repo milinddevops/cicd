@@ -54,7 +54,7 @@ def buildDockerImage() {
     withDockerRegistry(toolName: 'Docker', url: 'https://index.docker.io/v1/', credentialsId: 'DockerHubCredentials',) {
         dir('pet-clinic') {
             def custImage = docker.build("milinddocker/cicd:${env.BUILD_ID}")
-            custImage.push() 
+            // custImage.push() 
         }
     }
 }
