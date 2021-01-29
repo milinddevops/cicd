@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-        stage("Ansible - Deploy Playbook") {
+        stage("Run Ansible-Playbook") {
             steps{
                 sh'echo "Running playbook..."'
             }
