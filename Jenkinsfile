@@ -28,7 +28,7 @@ pipeline {
 
         stage("Build Image") {
             steps{
-                sh'echo "Building docker image ..."'
+                buildDockerImage()
             }
         }
     }
@@ -40,5 +40,12 @@ def prepWorkspace() {
   exws (extWorkspace) {
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[ url: 'https://github.com/milinddevops/cicd.git']]])
 
+  }
+
+  def buildDockerImage() {
+        withDockerRegistry(toolName: 'Docker', url: 'milinddocker/cicd') {
+            def custImage = docker.build("cicd:${env.BUILD_ID}")
+            custImage.push()
+        }
   }
 }
