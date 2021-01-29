@@ -45,7 +45,7 @@ def prepWorkspace() {
 }
 
 def buildDockerImage() {
-    withDockerRegistry(credentialsId: 'DockerHubCredentials', toolName: 'Docker', url: 'milinddocker/cicd') {
+    withDockerRegistry(toolName: 'Docker', url: 'milinddocker/cicd', credentialsId: 'DockerHubCredentials',) {
         dir('pet-clinic') {
             def custImage = docker.build("cicd:${env.BUILD_ID}")
             custImage.push() 
