@@ -42,7 +42,9 @@ def prepWorkspace() {
 
   }
 
-  def buildDockerImage() {
+}
+
+def buildDockerImage() {
         withDockerRegistry(toolName: 'Docker', url: 'milinddocker/cicd') {
             def custImage = docker.build("cicd:${env.BUILD_ID}")
             custImage.push()
