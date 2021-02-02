@@ -34,7 +34,9 @@ pipeline {
 
         stage("Run Ansible-Playbook") {
             steps{
-                sh'echo "Running playbook..."'
+                sshagent(['ssh-jenkins']) {
+                    sh'ssh -o StrictHostKeyChecking=no root@10.125.214.94 -c "ls -l /tmp/"'
+                }
             }
         }
     }
