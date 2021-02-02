@@ -35,7 +35,7 @@ pipeline {
         stage("Run Ansible-Playbook") {
             steps{
                 sshagent(['ssh-jenkins']) {
-                    sh'ssh -o StrictHostKeyChecking=no root@10.125.214.94 "ls -l /opt/build_workspaces/"'
+                    sh'ssh -o StrictHostKeyChecking=no root@10.125.214.94 "ansible-playbook /opt/play/deploy_application.yaml --extra-vars build_id=$BUILD_ID -i /opt/play/inventory.txt"'
                 }
             }
         }
