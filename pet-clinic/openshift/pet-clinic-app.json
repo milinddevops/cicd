@@ -1,0 +1,144 @@
+{
+    "kind": "Template",
+    "apiVersion": "template.openshift.io/v1",
+    "metadata": {
+        "name": "pet-clinic-app-template"
+    },
+    "objects": [
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "apps.openshift.io/v1",
+            "metadata": {
+                "name": "pet-clinic-app-1",
+                "labels": {
+                    "app": "pet-clinic-app-1"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Rolling",
+                    "rollingParams": {
+                        "updatePeriodSeconds": 1,
+                        "intervalSeconds": 1,
+                        "timeoutSeconds": 600,
+                        "maxUnavailable": "25%",
+                        "maxSurge": "25%"
+                    }
+                },
+                "replicas": "${REPLICA_COUNT}",
+                "selector": {
+                    "app": "pet-clinic-app-1",
+                    "deploymentconfig": "pet-clinic-app-1"
+                },
+                "template": {
+                    "metadata": {
+                        "labels": {
+                            "app": "pet-clinic-app-1",
+                            "deploymentconfig": "pet-clinic-app-1"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "pet-clinic-app-1",
+                                "image": "milinddocker/cicd:36",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {
+                                    "limits": {
+                                        "cpu": "${CPU_LIMIT}",
+                                        "memory": "${MEM_LIMIT}"
+                                    },
+                                    "requests": {
+                                        "cpu": "${CPU_REQ}",
+                                        "memory": "${MEM_REQ}"
+                                    }
+                                },
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "pet-clinic-app-1",
+                "labels": {
+                    "app": "pet-clinic-app-1"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "8080-tcp",
+                        "protocol": "TCP",
+                        "port": 8080,
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "deploymentconfig": "pet-clinic-app-1"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            }
+        },
+        {
+            "kind": "Route",
+            "apiVersion": "route.openshift.io/v1",
+            "metadata": {
+                "name": "pet-clinic-app-1",
+                "labels": {
+                    "app": "pet-clinic-app-1"
+                }
+            },
+            "spec": {
+                "host": "pet-clinic-app-1-cicd-applications.10.125.214.216",
+                "path": "/petclinic",
+                "to": {
+                    "kind": "Service",
+                    "name": "pet-clinic-app-1",
+                    "weight": 100
+                },
+                "port": {
+                    "targetPort": "8080-tcp"
+                },
+                "wildcardPolicy": "None"
+            }
+        }
+    ],
+
+    "parameters": [
+        {
+            "name": "REPLICA_COUNT",
+            "required": true
+        },
+        {
+            "name": "CPU_LIMIT",
+            "required": true
+        },
+        {
+            "name": "MEM_LIMIT",
+            "required": true
+        },
+        {
+            "name": "CPU_REQ",
+            "required": true
+        },
+        {
+            "name": "MEM_REQ",
+            "required": true
+        }
+    ]
+}
