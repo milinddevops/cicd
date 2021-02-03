@@ -2,7 +2,7 @@
     "kind": "Template",
     "apiVersion": "template.openshift.io/v1",
     "metadata": {
-        "name": "pet-clinic-app-template"
+        "name": "pet-clinic-app-template-1"
     },
     "objects": [
         {
