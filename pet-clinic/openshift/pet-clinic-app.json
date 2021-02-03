@@ -25,6 +25,11 @@
                         "maxSurge": "25%"
                     }
                 },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    }
+                ],
                 "replicas": "${REPLICA_COUNT}",
                 "selector": {
                     "app": "pet-clinic-app-1",
