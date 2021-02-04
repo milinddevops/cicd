@@ -30,7 +30,7 @@
                         "type": "ConfigChange"
                     }
                 ],
-                "replicas": "${REPLICA_COUNT}",
+                "replicas": "${{REPLICA_COUNT}}",
                 "selector": {
                     "app": "pet-clinic-app-1",
                     "deploymentconfig": "pet-clinic-app-1"
@@ -46,7 +46,7 @@
                         "containers": [
                             {
                                 "name": "pet-clinic-app-1",
-                                "image": "milinddocker/cicd:36",
+                                "image": "milinddocker/cicd:${{IMAGE_VERSION}}",
                                 "ports": [
                                     {
                                         "containerPort": 8080,
@@ -55,12 +55,12 @@
                                 ],
                                 "resources": {
                                     "limits": {
-                                        "cpu": "${CPU_LIMIT}",
-                                        "memory": "${MEM_LIMIT}"
+                                        "cpu": "${{CPU_LIMIT}}",
+                                        "memory": "${{MEM_LIMIT}}"
                                     },
                                     "requests": {
-                                        "cpu": "${CPU_REQ}",
-                                        "memory": "${MEM_REQ}"
+                                        "cpu": "${{CPU_REQ}}",
+                                        "memory": "${{MEM_REQ}}"
                                     }
                                 },
                                 "imagePullPolicy": "Always"
