@@ -144,6 +144,10 @@
         {
             "name": "MEM_REQ",
             "required": true
+        },
+        {
+            "name": "IMAGE_VERSION",
+            "required": true
         }
     ]
 }
