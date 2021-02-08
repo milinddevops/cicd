@@ -2,16 +2,16 @@
     "kind": "Template",
     "apiVersion": "template.openshift.io/v1",
     "metadata": {
-        "name": "cicd-app-app-template-1"
+        "name": "pet-clinic-app-template-1"
     },
     "objects": [
         {
             "kind": "DeploymentConfig",
             "apiVersion": "apps.openshift.io/v1",
             "metadata": {
-                "name": "cicd-app",
+                "name": "pet-clinic",
                 "labels": {
-                    "app": "cicd-app"
+                    "app": "pet-clinic"
                 }
             },
             "spec": {
@@ -32,20 +32,20 @@
                 ],
                 "replicas": "${{REPLICA_COUNT}}",
                 "selector": {
-                    "app": "cicd-app",
-                    "deploymentconfig": "cicd-app"
+                    "app": "pet-clinic",
+                    "deploymentconfig": "pet-clinic"
                 },
                 "template": {
                     "metadata": {
                         "labels": {
-                            "app": "cicd-app",
-                            "deploymentconfig": "cicd-app"
+                            "app": "pet-clinic",
+                            "deploymentconfig": "pet-clinic"
                         }
                     },
                     "spec": {
                         "containers": [
                             {
-                                "name": "cicd-app",
+                                "name": "pet-clinic",
                                 "image": "milinddocker/cicd:${IMAGE_VERSION}",
                                 "ports": [
                                     {
@@ -78,9 +78,9 @@
             "kind": "Service",
             "apiVersion": "v1",
             "metadata": {
-                "name": "cicd-app",
+                "name": "pet-clinic",
                 "labels": {
-                    "app": "cicd-app"
+                    "app": "pet-clinic"
                 }
             },
             "spec": {
@@ -93,7 +93,7 @@
                     }
                 ],
                 "selector": {
-                    "deploymentconfig": "cicd-app"
+                    "deploymentconfig": "pet-clinic"
                 },
                 "type": "ClusterIP",
                 "sessionAffinity": "None"
@@ -103,17 +103,17 @@
             "kind": "Route",
             "apiVersion": "route.openshift.io/v1",
             "metadata": {
-                "name": "cicd-app",
+                "name": "pet-clinic",
                 "labels": {
-                    "app": "cicd-app"
+                    "app": "pet-clinic"
                 }
             },
             "spec": {
-                "host": "cicd-app-cicd-applications.10.125.214.216",
+                "host": "pet-clinic-pet-cliniclications.10.125.214.216",
                 "path": "/petclinic",
                 "to": {
                     "kind": "Service",
-                    "name": "cicd-app",
+                    "name": "pet-clinic",
                     "weight": 100
                 },
                 "port": {
