@@ -2,16 +2,16 @@
     "kind": "Template",
     "apiVersion": "template.openshift.io/v1",
     "metadata": {
-        "name": "pet-clinic-dev-app-template-1"
+        "name": "pet-clinic-dev-env-env-app-template-1"
     },
     "objects": [
         {
             "kind": "DeploymentConfig",
             "apiVersion": "apps.openshift.io/v1",
             "metadata": {
-                "name": "pet-clinic-dev",
+                "name": "pet-clinic-dev-env",
                 "labels": {
-                    "app": "pet-clinic-dev"
+                    "app": "pet-clinic-dev-env"
                 }
             },
             "spec": {
@@ -32,20 +32,20 @@
                 ],
                 "replicas": "${{REPLICA_COUNT}}",
                 "selector": {
-                    "app": "pet-clinic-dev",
-                    "deploymentconfig": "pet-clinic-dev"
+                    "app": "pet-clinic-dev-env",
+                    "deploymentconfig": "pet-clinic-dev-env"
                 },
                 "template": {
                     "metadata": {
                         "labels": {
-                            "app": "pet-clinic-dev",
-                            "deploymentconfig": "pet-clinic-dev"
+                            "app": "pet-clinic-dev-env",
+                            "deploymentconfig": "pet-clinic-dev-env"
                         }
                     },
                     "spec": {
                         "containers": [
                             {
-                                "name": "pet-clinic-dev",
+                                "name": "pet-clinic-dev-env",
                                 "image": "milinddocker/cicd:${IMAGE_VERSION}",
                                 "ports": [
                                     {
@@ -78,9 +78,9 @@
             "kind": "Service",
             "apiVersion": "v1",
             "metadata": {
-                "name": "pet-clinic-dev",
+                "name": "pet-clinic-dev-env",
                 "labels": {
-                    "app": "pet-clinic-dev"
+                    "app": "pet-clinic-dev-env"
                 }
             },
             "spec": {
@@ -93,7 +93,7 @@
                     }
                 ],
                 "selector": {
-                    "deploymentconfig": "pet-clinic-dev"
+                    "deploymentconfig": "pet-clinic-dev-env"
                 },
                 "type": "ClusterIP",
                 "sessionAffinity": "None"
@@ -103,17 +103,17 @@
             "kind": "Route",
             "apiVersion": "route.openshift.io/v1",
             "metadata": {
-                "name": "pet-clinic-dev",
+                "name": "pet-clinic-dev-env",
                 "labels": {
-                    "app": "pet-clinic-dev"
+                    "app": "pet-clinic-dev-env"
                 }
             },
             "spec": {
-                "host": "pet-clinic-dev-pet-clinic-devlications.10.125.214.216",
+                "host": "pet-clinic-dev-env-pet-clinic-dev-envlications.10.125.214.216",
                 "path": "/petclinic",
                 "to": {
                     "kind": "Service",
-                    "name": "pet-clinic-dev",
+                    "name": "pet-clinic-dev-env",
                     "weight": 100
                 },
                 "port": {
