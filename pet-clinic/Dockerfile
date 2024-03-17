@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-jammy as base
+From tomcat:8.0.51-jre8-alpine
 WORKDIR /app
 COPY mvnw pom.xml ./
 COPY src ./src
