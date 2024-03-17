@@ -1,0 +1,11 @@
+appName: clinic-app
+
+namespace: app
+
+image:
+  name: milinddocker/cicd
+  tag: v1.0.0
+
+containers:
+  port: 8082
+  replicas: 1
