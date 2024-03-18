@@ -3,6 +3,8 @@ WORKDIR /app
 COPY mvnw pom.xml ./
 COPY target ./target
 
+RUN ls -lrt /app/target
+
 # Copy jar files
 COPY /app/target/spring-petclinic-*.jar /spring-petclinic.jar
 EXPOSE 8082
