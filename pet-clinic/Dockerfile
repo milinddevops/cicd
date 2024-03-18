@@ -1,7 +1,7 @@
 From tomcat:8.0.51-jre8-alpine
 WORKDIR /app
 COPY mvnw pom.xml ./
-COPY src ./src
+COPY target ./target
 
 # Copy jar files
 COPY /app/target/spring-petclinic-*.jar /spring-petclinic.jar
