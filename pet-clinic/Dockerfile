@@ -7,5 +7,4 @@ RUN ls -lrt /app/target
 
 # Copy jar files
 COPY /app/target/spring-petclinic-*.jar /spring-petclinic.jar
-EXPOSE 8082
-CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclinic.jar"]
+EXPOSE 8082spring-petclinic ["java"spring-petclinicDjava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclinic.jar"]
